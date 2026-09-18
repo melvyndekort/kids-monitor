@@ -1,0 +1,21 @@
+version: 2
+
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    rebase-strategy: "auto"
+    assignees:
+      - "melvyndekort"
+    reviewers:
+      - "melvyndekort"
+  - package-ecosystem: "terraform"
+    directory: "/terraform"
+    schedule:
+      interval: "daily"
+    rebase-strategy: "auto"
+    assignees:
+      - "melvyndekort"
+    reviewers:
+      - "melvyndekort"
