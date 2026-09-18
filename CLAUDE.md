@@ -38,6 +38,10 @@ is pushed by `network-monitor`'s `data-collector` (`pihole.py` client),
 labels: `job`, `device` (`chromebook`/`phone`), `result`
 (`allowed`/`blocked`); log line body carries the domain as JSON.
 
+## MCP servers
+
+This repo has a project-scoped `grafana` MCP server (`.mcp.json`) — see `~/.claude/references/mcp-catalog.md`.
+
 ## Related Repositories
 
 - `~/src/melvyndekort/tf-grafana` — Provides Grafana URL + service account
