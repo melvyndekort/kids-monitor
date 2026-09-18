@@ -21,6 +21,7 @@ resource "grafana_dashboard" "daan_chromebook" {
             expr         = "sum(count_over_time({job=\"pihole-daan\"}[$__range]))"
             legendFormat = "queries"
             refId        = "A"
+            instant      = true
           }
         ]
         gridPos = { h = 4, w = 6, x = 0, y = 0 }
@@ -35,6 +36,7 @@ resource "grafana_dashboard" "daan_chromebook" {
             expr         = "sum by (result) (count_over_time({job=\"pihole-daan\"}[$__range]))"
             legendFormat = "{{result}}"
             refId        = "A"
+            instant      = true
           }
         ]
         gridPos = { h = 8, w = 6, x = 6, y = 0 }
@@ -49,6 +51,7 @@ resource "grafana_dashboard" "daan_chromebook" {
             expr         = "count(count by (domain) (count_over_time({job=\"pihole-daan\", result=\"blocked\"} | json [$__range])))"
             legendFormat = "domains"
             refId        = "A"
+            instant      = true
           }
         ]
         gridPos = { h = 4, w = 6, x = 12, y = 0 }
@@ -101,9 +104,10 @@ resource "grafana_dashboard" "daan_chromebook" {
         datasource = { type = "loki", uid = local.loki_uid }
         targets = [
           {
-            expr   = "topk(15, sum by (domain) (count_over_time({job=\"pihole-daan\", result=\"blocked\"} | json [$__range])))"
-            format = "table"
-            refId  = "A"
+            expr    = "topk(15, sum by (domain) (count_over_time({job=\"pihole-daan\", result=\"blocked\"} | json [$__range])))"
+            format  = "table"
+            refId   = "A"
+            instant = true
           }
         ]
         gridPos = { h = 8, w = 8, x = 0, y = 12 }
@@ -149,9 +153,10 @@ resource "grafana_dashboard" "daan_chromebook" {
         datasource = { type = "loki", uid = local.loki_uid }
         targets = [
           {
-            expr   = "topk(15, sum by (domain) (count_over_time({job=\"pihole-daan\", result=\"allowed\"} | json [$__range])))"
-            format = "table"
-            refId  = "A"
+            expr    = "topk(15, sum by (domain) (count_over_time({job=\"pihole-daan\", result=\"allowed\"} | json [$__range])))"
+            format  = "table"
+            refId   = "A"
+            instant = true
           }
         ]
         gridPos = { h = 8, w = 24, x = 0, y = 20 }
@@ -168,6 +173,7 @@ resource "grafana_dashboard" "daan_chromebook" {
             expr         = "sum by (device, result) (count_over_time({job=\"pihole-daan\"}[$__range]))"
             legendFormat = "{{device}} - {{result}}"
             refId        = "A"
+            instant      = true
           }
         ]
         gridPos = { h = 8, w = 24, x = 0, y = 28 }
