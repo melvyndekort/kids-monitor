@@ -48,7 +48,7 @@ resource "grafana_dashboard" "daan_chromebook" {
         datasource = { type = "loki", uid = local.loki_uid }
         targets = [
           {
-            expr         = "count(count by (domain) (count_over_time({job=\"pihole-daan\", result=\"blocked\"} | json [$__range])))"
+            expr         = "count(count by (domain) (count_over_time({job=\"pihole-daan\", result=\"blocked\"} | json [$__range]))) or vector(0)"
             legendFormat = "domains"
             refId        = "A"
             instant      = true
@@ -110,6 +110,16 @@ resource "grafana_dashboard" "daan_chromebook" {
             instant = true
           }
         ]
+        transformations = [
+          { id = "labelsToFields", options = {} },
+          {
+            id = "organize"
+            options = {
+              excludeByName = { Time = true }
+              renameByName  = { Value = "Count" }
+            }
+          }
+        ]
         gridPos = { h = 8, w = 8, x = 0, y = 12 }
       },
       {
@@ -157,6 +167,16 @@ resource "grafana_dashboard" "daan_chromebook" {
             format  = "table"
             refId   = "A"
             instant = true
+          }
+        ]
+        transformations = [
+          { id = "labelsToFields", options = {} },
+          {
+            id = "organize"
+            options = {
+              excludeByName = { Time = true }
+              renameByName  = { Value = "Count" }
+            }
           }
         ]
         gridPos = { h = 8, w = 24, x = 0, y = 20 }
