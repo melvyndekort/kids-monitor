@@ -13,7 +13,7 @@ updates:
   - package-ecosystem: "terraform"
     directory: "/terraform"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     rebase-strategy: "auto"
     assignees:
       - "melvyndekort"
